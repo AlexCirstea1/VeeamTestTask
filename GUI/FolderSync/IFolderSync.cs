@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace VeeamTestTask.FolderSync
 {
     internal interface IFolderSync
-    {
-        public void SynchronizeFolders();
-        public void SynchronizeFolder(string sourceFolder, string replicaFolder);
-        public void LogFile(string message);
+    { 
+        void SynchronizeFolders();
+        void SynchronizeFolder(string sourceFolder, string replicaFolder);
+        void LogFile(string message);
     }
 }

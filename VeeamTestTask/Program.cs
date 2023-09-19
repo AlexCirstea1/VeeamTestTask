@@ -4,10 +4,29 @@ class Program
 {
     public static void Main(string[] args)
     {
-        FolderSync sync = new FolderSync(
-            "C:\\Users\\Alex\\Desktop\\VeeamTestTask\\VeeamTestTask\\DataSource\\",
-            "C:\\Users\\Alex\\Desktop\\VeeamTestTask\\VeeamTestTask\\DataReplica\\");
+        Console.WriteLine("Folder Synchronization:\nEnter Source Folder Path:");
+        var sourcePath = Console.ReadLine();
+        Console.WriteLine("Enter Replica Folder Path:");
+        var replicaPath = Console.ReadLine();
+        Console.WriteLine("Enter Log File Path:");
+        var logPath = Console.ReadLine();
 
-        sync.SynchronizeFolders();
+        IFolderSync folderSync = new FolderSync(sourcePath, replicaPath, logPath);
+
+        PeriodicSync(folderSync);
+
+        Console.WriteLine("Press 'Q' to quit.");
+        while (Console.ReadKey().Key != ConsoleKey.Q);
+    }
+
+    public static void PeriodicSync(IFolderSync folderSync)
+    {
+        Console.WriteLine("Enter synchronization interval:");
+        var syncInterval = int.Parse(Console.ReadLine());
+        var timer = new Timer(
+            state => folderSync.SynchronizeFolders(),
+            null, 
+            0, 
+            syncInterval);
     }
 }

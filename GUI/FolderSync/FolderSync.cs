@@ -34,9 +34,7 @@ namespace VeeamTestTask.FolderSync
 
         public void SynchronizeFolder(string sourceFolder, string replicaFolder)
         {
-            var sourceFilePaths = Directory.GetFiles(sourceFolder);
-
-            foreach (var sourceFilePath in sourceFilePaths)
+            foreach (var sourceFilePath in Directory.GetFiles(sourceFolder))
             {
                 var fileName = Path.GetFileName(sourceFilePath);
                 var replicaFilePath = Path.Combine(replicaFolder, fileName);
@@ -63,24 +61,6 @@ namespace VeeamTestTask.FolderSync
                 catch (Exception e)
                 {
                     LogFile("Error handling file " + fileName + ": " + e.Message);
-                }
-            }
-
-            foreach (var replicaFilePath in Directory.GetFiles(replicaFolder))
-            {
-                var fileName = Path.GetFileName(replicaFilePath);
-
-                if (!sourceFilePaths.Contains(Path.Combine(sourceFolder, fileName)))
-                {
-                    try
-                    {
-                        File.Delete(replicaFilePath);
-                        LogFile("File deleted from replica: " + fileName);
-                    }
-                    catch (Exception e)
-                    {
-                        LogFile("Error deleting file from replica: " + fileName + ": " + e.Message);
-                    }
                 }
             }
         }
