@@ -12,18 +12,11 @@ namespace VeeamTestTask.FolderSync
         private string replicaPath;
         private string logPath;
 
-        public FolderSync(string sourcePath, string replicaPath)
+        public FolderSync(string sourcePath, string replicaPath, string logPath)
         {
             this.sourcePath = sourcePath;
             this.replicaPath = replicaPath;
-            LogPathGenerate();
-        }
-
-        private void LogPathGenerate()
-        {
-            string desktopDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string logsFilePath = Path.Combine(desktopDirectory, @"VeeamTestTask\VeeamTestTask\Logs\logs.txt");
-            logPath = logsFilePath;
+            this.logPath = logPath;
         }
 
         public void SynchronizeFolders()
@@ -44,7 +37,7 @@ namespace VeeamTestTask.FolderSync
             {
                 string entry = DateTime.Now + ": " + message;
                 Console.WriteLine(entry);
-                File.AppendAllText(logPath, entry + Environment.NewLine);
+                File.AppendAllText(logPath, entry + Environment.);
             }
             catch (Exception e)
             {
