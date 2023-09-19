@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+    <Folder Include="DataReplica\" />
+  </ItemGroup>
+
 </Project>
